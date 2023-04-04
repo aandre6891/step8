@@ -33,14 +33,29 @@ def input_students
   students
 end
 
+def filtered_by_cohort(students)
+  filtered_by_cohort = {}
+  students.each do |student|
+    cohort = student[:cohort]
+    name = student[:name]
+
+    if filtered_by_cohort[cohort] == nil
+      filtered_by_cohort[cohort] = [name]
+    else
+    filtered_by_cohort[cohort].push(name)
+    end
+  end
+  filtered_by_cohort
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
 
-def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+def print(filt_students)
+  filt_students.each do |key, value|
+    puts "#{key}: #{value}"
   end
 end
 
@@ -49,7 +64,8 @@ def print_footer(students)
 end
 
 students = input_students
+filt_students = filtered_by_cohort(students)
 #nothing happens until we call the methods
 print_header
-print(students)
+print(filt_students)
 print_footer(students)
