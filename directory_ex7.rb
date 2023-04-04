@@ -5,19 +5,29 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp.upcase
-  # get the cohort
-  puts "Please, enter the cohort of this student"
-  cohort = gets.chomp.downcase
-  if cohort = ""
-    cohort = "2023"
+  if !name.empty?
+    # get the cohort
+    puts "Please, enter the cohort of this student"
+    cohort = gets.chomp.downcase
+    if cohort.empty? 
+      cohort = "2023"
+    end
   end
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: cohort}
-    puts "Now we have #{students.count} students"
+    students << {name: name, cohort: cohort.to_sym}
+    puts "Now we have #{students.count} students, add a new one or hit return to stop"
     # get another name from the user
     name = gets.chomp.upcase
+    if !name.empty?
+      # get the cohort of this student
+      puts "Please, enter the cohort of this student"
+      cohort = gets.chomp.downcase
+      if cohort.empty? 
+        cohort = "2023"
+      end
+    end
   end
   # return the array of students
   students
